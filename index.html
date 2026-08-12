@@ -418,6 +418,80 @@ header .appDownload{flex:0 0 auto}
 .bottomSearchBox{z-index:201}
 </style>
 
+
+<style id="watch-party-ui">
+.watchPartyFab{
+  position:fixed;right:18px;bottom:82px;z-index:5000;
+  border:1px solid #444;background:#151515;color:#fff;
+  border-radius:999px;padding:12px 16px;font-weight:700;
+  box-shadow:0 10px 35px #0008;cursor:pointer
+}
+.watchPartyFab:hover{background:#222}
+.watchPartyPanel{
+  position:fixed;right:18px;bottom:140px;width:min(360px,calc(100vw - 36px));
+  z-index:5001;background:#111;color:#fff;border:1px solid #333;
+  border-radius:16px;padding:16px;box-shadow:0 20px 70px #000;
+  display:none
+}
+.watchPartyPanel.open{display:block}
+.watchPartyPanel h3{margin:0 0 7px}
+.watchPartyPanel p{font-size:12px;color:#aaa;line-height:1.45}
+.wpInput{width:100%;box-sizing:border-box;background:#080808;color:#fff;border:1px solid #333;border-radius:9px;padding:11px;margin:5px 0}
+.wpBtn{border:0;background:#e50914;color:#fff;border-radius:9px;padding:10px 13px;font-weight:700;cursor:pointer}
+.wpBtn.secondary{background:#292929}
+.wpRow{display:flex;gap:7px;margin-top:8px}
+.wpRow>*{flex:1}
+.wpLink{display:none;margin-top:9px;padding:9px;border-radius:9px;background:#080808;border:1px solid #292929;font-size:11px;word-break:break-all}
+.wpStatus{font-size:11px;color:#aaa;margin-top:9px}
+</style>
+
+
+<style id="player-watchparty-ui">
+#playerWatchPartyBtn{
+  position:fixed;right:16px;top:16px;z-index:999999;
+  border:1px solid #444;background:rgba(15,15,15,.94);color:#fff;
+  border-radius:999px;padding:11px 15px;font-weight:700;cursor:pointer;
+  box-shadow:0 10px 35px #0008;backdrop-filter:blur(8px)
+}
+#playerWatchPartyPanel{
+  position:fixed;right:16px;top:68px;width:min(350px,calc(100vw - 32px));
+  z-index:999998;background:#111;color:#fff;border:1px solid #333;
+  border-radius:15px;padding:15px;box-shadow:0 20px 70px #000;
+  display:none;font-family:Arial,sans-serif
+}
+#playerWatchPartyPanel.open{display:block}
+#playerWatchPartyPanel h3{margin:0 0 6px}
+#playerWatchPartyPanel p{font-size:12px;color:#aaa;line-height:1.4}
+#playerWPJoin{width:100%;box-sizing:border-box;background:#080808;color:#fff;border:1px solid #333;border-radius:9px;padding:10px;margin:6px 0}
+.playerWPBtn{border:0;background:#e50914;color:#fff;border-radius:9px;padding:10px 12px;font-weight:700;cursor:pointer}
+.playerWPBtn.secondary{background:#292929}
+.playerWPLink{display:none;margin-top:8px;padding:9px;border-radius:8px;background:#080808;border:1px solid #292929;font-size:11px;word-break:break-all}
+#playerWPStatus{font-size:11px;color:#aaa;margin-top:8px}
+</style>
+
+
+<style id="external-player-shell">
+html.extPlayer,body.extPlayer{margin:0!important;background:#000!important;overflow:hidden!important}
+body.extPlayer>*:not(#externalPlayerShell){display:none!important}
+#externalPlayerShell{position:fixed;inset:0;background:#000;z-index:99999;display:none;font-family:Arial,sans-serif}
+body.extPlayer #externalPlayerShell{display:flex;flex-direction:column}
+.epsTop{height:54px;flex:0 0 54px;background:#0b0b0b;border-bottom:1px solid #222;color:#fff;display:flex;align-items:center;gap:9px;padding:0 10px;box-sizing:border-box}
+.epsBack,.epsParty,.epsFull{height:38px;min-width:40px;border:1px solid #383838;background:#161616;color:#fff;border-radius:9px;cursor:pointer}
+.epsTitle{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:13px;font-weight:700}
+.epsStage{position:relative;flex:1;min-height:0;background:#000}
+#externalPlayerFrame{width:100%;height:100%;border:0;display:block;background:#000}
+.epsPartyPanel{position:absolute;right:12px;top:12px;width:min(350px,calc(100vw - 24px));background:#111;color:#fff;border:1px solid #333;border-radius:15px;padding:15px;box-sizing:border-box;box-shadow:0 20px 70px #000;display:none;z-index:5}
+.epsPartyPanel.open{display:block}
+.epsPartyPanel h3{margin:0 0 6px;font-size:18px}
+.epsPartyPanel p{font-size:12px;color:#aaa;line-height:1.4;margin:0 0 10px}
+.epsInput{width:100%;box-sizing:border-box;background:#080808;color:#fff;border:1px solid #333;border-radius:9px;padding:10px;margin:5px 0}
+.epsBtn{width:100%;border:0;background:#e50914;color:#fff;border-radius:9px;padding:10px;font-weight:700;cursor:pointer;margin-top:5px}
+.epsBtn.alt{background:#292929}
+.epsLink{display:none;margin-top:9px;padding:9px;border:1px solid #292929;background:#080808;border-radius:8px;font-size:11px;word-break:break-all}
+.epsStatus{font-size:11px;color:#aaa;margin-top:8px}
+@media(max-width:600px){.epsTitle{font-size:11px}.epsTop{height:50px;flex-basis:50px}.epsPartyPanel{top:8px;right:8px}}
+</style>
+
 </head>
 <body>
 
@@ -431,7 +505,7 @@ header .appDownload{flex:0 0 auto}
     <a onclick="scrollToId('continue')">Continue Watching</a>
   </nav>
   <button class="headerSearchBtn" type="button" aria-label="Search" onclick="openBottomSearch()">⌕</button>
-  <a class="appDownload" href="https://apk.e-droid.net/apk/app4140968-r8d4qx.apk?v=5" aria-label="Download Cinema IMAX app" onclick="if(window.va){window.va(\'event\',\'Get App Click\')}">⬇ Get App</a>
+  <a class="appDownload" href="https://www.appcreator24.com/app4140968-r8d4qx" aria-label="Download Cinema IMAX app" onclick="if(window.va){window.va(\'event\',\'Get App Click\')}">⬇ Get App</a>
 </header>
 
 
@@ -722,8 +796,8 @@ document.addEventListener('keydown',function(e){
 
 <script>
 const TOKEN='eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5Y2QwMTc3YWEzNjAyZDVmMjc3YmQ0NzFkMjg2OTNjNCIsIm5iZiI6MTc4NTg5MDUxMy42NDMwMDAxLCJzdWIiOiI2YTcyODZkMTgyZjU2Njc1ZTVhMGUxYTMiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.vU6TyzzsBTwjCOOn86WIdsyBG0pN8sOue06vpgkHbHg',API="https://api.themoviedb.org/3",IMG="https://image.tmdb.org/t/p/",PLAYER="https://www.vidking.net/embed/";MOVIE_PLAYER="https://www.vidking.net/embed/";
-function moviePlayerUrl(id){return MOVIE_PLAYER+"movie/"+encodeURIComponent(id)+"?color=e50914&autoPlay=true";}
-function tvPlayerUrl(id,season,episode){return PLAYER+"tv/"+encodeURIComponent(id)+"/"+season+"/"+episode+"?color=e50914&autoPlay=true&nextEpisode=true&episodeSelector=true";}
+function moviePlayerUrl(id){return "index.html?watch=movie&id="+encodeURIComponent(id);}
+function tvPlayerUrl(id,season,episode){return "index.html?watch=tv&id="+encodeURIComponent(id)+"&season="+encodeURIComponent(season)+"&episode="+encodeURIComponent(episode);}
 function spiderManMoviePlayerUrl(id){return moviePlayerUrl(id);}
 let moviePage=1,tvPage=1,allMoviePage=1,allShowPage=1,pendingTV=null,movieCache=[],tvCache=[];
 async function api(path){const r=await fetch(API+path,{headers:{Authorization:"Bearer "+TOKEN,Accept:"application/json"}});if(!r.ok)throw Error("TMDB "+r.status);return r.json()}
@@ -1094,6 +1168,430 @@ document.addEventListener('DOMContentLoaded',initHero);
   });
   row.addEventListener('pointerup',()=>down=false);
   row.addEventListener('pointercancel',()=>down=false);
+})();
+</script>
+
+
+
+<script>
+(function(){
+  const qs=new URLSearchParams(location.search);
+  if(!qs.has('watch')) return;
+
+  document.documentElement.classList.add('playerMode');
+  document.body.classList.add('playerMode');
+
+  const type=qs.get('watch')==='tv'?'tv':'movie';
+  const id=qs.get('id');
+  const season=qs.get('season')||'1';
+  const episode=qs.get('episode')||'1';
+  const start=Number(qs.get('start')||0);
+  const frame=document.getElementById('cpFrame');
+  const titleEl=document.getElementById('cpTitle');
+  const statusEl=document.getElementById('cpStatus');
+  const roomEl=document.getElementById('cpRoomState');
+
+  const provider = type==='tv'
+    ? PLAYER+"tv/"+encodeURIComponent(id)+"/"+season+"/"+episode+"?color=e50914&autoPlay=true&nextEpisode=true&episodeSelector=true"
+    : MOVIE_PLAYER+"movie/"+encodeURIComponent(id)+"?color=e50914&autoPlay=true";
+
+  frame.src=provider;
+  titleEl.textContent=(type==='tv'?'TV Show • S'+season+' E'+episode:'Movie')+' • ID '+id;
+
+  let peer=null, conn=null, isHost=false, roomId=null, syncTimer=null;
+
+  window.cpBack=function(){ location.href='index.html'; };
+  window.cpFullscreen=function(){
+    const el=document.getElementById('cpStage');
+    (el.requestFullscreen||el.webkitRequestFullscreen||el.msRequestFullscreen)?.call(el);
+  };
+  window.cpToggleParty=function(){ document.getElementById('cpParty').classList.toggle('open'); };
+  window.cpStatus=function(t){statusEl.textContent=t;};
+
+  function postPlayer(command,value){
+    try{
+      frame.contentWindow.postMessage({type:'cinema-player',command,value,source:'cinema-imax'},'*');
+      frame.contentWindow.postMessage({action:command,value,source:'cinema-imax'},'*');
+    }catch(e){}
+  }
+
+  window.cpSend=function(command,value){
+    postPlayer(command,value);
+    if(conn && conn.open){
+      conn.send({kind:'control',command,value,at:Date.now()});
+    }
+    cpStatus(command==='play'?'Playing':command==='pause'?'Paused':('Seek '+value+'s'));
+  };
+
+  window.cpTryCast=function(){
+    // Best-effort browser casting hooks. For TV/console browsers, fullscreen + browser casting is the reliable path.
+    const video=document.querySelector('#cpStage video');
+    if(video && typeof video.webkitShowPlaybackTargetPicker==='function'){
+      video.webkitShowPlaybackTargetPicker();
+      return;
+    }
+    cpStatus('Use TV/console browser Cast or AirPlay');
+    cpFullscreen();
+  };
+
+  function broadcast(msg){
+    if(conn && conn.open) conn.send(msg);
+  }
+
+  function makePeer(preferred){
+    peer=new Peer(preferred || undefined,{debug:0});
+    peer.on('open',id=>{
+      roomId=id;
+      if(isHost){
+        const url=location.origin+location.pathname+'?watch='+type+'&id='+encodeURIComponent(id===roomId?qs.get('id'):qs.get('id'));
+        const joinUrl=location.origin+location.pathname+'?watch='+type+'&id='+encodeURIComponent(qs.get('id'))+'&season='+encodeURIComponent(season)+'&episode='+encodeURIComponent(episode)+'&room='+encodeURIComponent(id);
+        const linkEl=document.getElementById('cpLink');
+        linkEl.textContent=joinUrl; linkEl.style.display='block';
+        document.getElementById('cpHost').style.display='block';
+        document.getElementById('cpHost').textContent='Host room: '+id+' • Copy the link above.';
+        roomEl.textContent='Host room';
+        cpStatus('Room created');
+        try{navigator.clipboard?.writeText(joinUrl)}catch(e){}
+      }
+    });
+    peer.on('connection',c=>{
+      if(isHost){ conn=c; setupConn(c); }
+    });
+    peer.on('error',e=>{
+      cpStatus('Party connection error');
+      console.warn(e);
+    });
+  }
+
+  function setupConn(c){
+    conn=c;
+    conn.on('open',()=>{
+      roomEl.textContent=isHost?'Host • 1+ guest':'Guest';
+      cpStatus('Connected');
+      conn.send({kind:'hello',type,id,season,episode});
+    });
+    conn.on('data',msg=>{
+      if(!msg) return;
+      if(msg.kind==='control'){
+        postPlayer(msg.command,msg.value);
+        cpStatus('Synced: '+msg.command);
+      }
+      if(msg.kind==='hello' && isHost){
+        conn.send({kind:'media',type,id,season,episode});
+      }
+      if(msg.kind==='media'){
+        cpStatus('Room synced');
+      }
+    });
+    conn.on('close',()=>{roomEl.textContent=isHost?'Host':'Solo';cpStatus('Guest left');});
+  }
+
+  window.cpCreateRoom=function(){
+    if(!window.Peer){cpStatus('Party service unavailable');return;}
+    isHost=true;
+    if(peer && !peer.destroyed) peer.destroy();
+    makePeer();
+  };
+
+  window.cpJoinRoom=function(){
+    if(!window.Peer){cpStatus('Party service unavailable');return;}
+    let raw=(document.getElementById('cpJoinInput').value||'').trim();
+    if(!raw){cpStatus('Paste a room link or ID');return;}
+    try{
+      if(raw.includes('room=')) raw=new URL(raw,location.href).searchParams.get('room');
+    }catch(e){}
+    if(!raw){cpStatus('Invalid room');return;}
+    isHost=false;
+    if(peer && !peer.destroyed) peer.destroy();
+    peer=new Peer(undefined,{debug:0});
+    peer.on('open',myId=>{
+      conn=peer.connect(raw,{reliable:true});
+      setupConn(conn);
+    });
+    peer.on('error',()=>cpStatus('Could not join room'));
+  };
+
+  // Auto-join when ?room=... is present.
+  const autoRoom=qs.get('room');
+  if(autoRoom){
+    document.getElementById('cpParty').classList.add('open');
+    document.getElementById('cpJoinInput').value=autoRoom;
+    setTimeout(cpJoinRoom,250);
+  }
+
+  // Host periodically sends a lightweight heartbeat. Provider controls remain best-effort
+  // because the embedded player is cross-origin.
+  setInterval(()=>{
+    if(isHost && conn && conn.open){
+      broadcast({kind:'heartbeat',at:Date.now()});
+    }
+  },3000);
+
+  window.addEventListener('message',e=>{
+    if(e.data && e.data.source==='cinema-imax') cpStatus('Player connected');
+  });
+})();
+</script>
+
+
+<button class="watchPartyFab" id="watchPartyFab" onclick="toggleWatchParty()">👥 Watch Party</button>
+<div class="watchPartyPanel" id="watchPartyPanel">
+  <h3>👥 Watch Party</h3>
+  <p>اعمل Room وابعث اللينك لأصحابك. البلاير نفسه يفضل External زي ما طلبت.</p>
+  <button class="wpBtn" style="width:100%" onclick="createWatchParty()">Create Room</button>
+  <input class="wpInput" id="wpJoin" placeholder="Paste room link / room ID">
+  <button class="wpBtn secondary" style="width:100%" onclick="joinWatchParty()">Join Room</button>
+  <div class="wpLink" id="wpLink"></div>
+  <div class="wpStatus" id="wpStatus">Solo</div>
+</div>
+
+<script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+<script>
+(function(){
+  let wpPeer=null, wpConn=null, wpRoom=null;
+
+  window.toggleWatchParty=function(){
+    document.getElementById('watchPartyPanel').classList.toggle('open');
+  };
+  function status(x){document.getElementById('wpStatus').textContent=x}
+
+  window.createWatchParty=function(){
+    if(!window.Peer){status('Party service unavailable');return}
+    if(wpPeer) try{wpPeer.destroy()}catch(e){}
+    wpPeer=new Peer();
+    wpPeer.on('open',id=>{
+      wpRoom=id;
+      const u=new URL(location.href);
+      u.searchParams.set('party',id);
+      const link=u.toString();
+      const box=document.getElementById('wpLink');
+      box.textContent=link;box.style.display='block';
+      status('Room created • '+id);
+      try{navigator.clipboard.writeText(link)}catch(e){}
+    });
+    wpPeer.on('connection',c=>{
+      wpConn=c;
+      c.on('open',()=>status('Guest connected'));
+      c.on('data',m=>status('Guest: '+(m?.kind||'connected')));
+    });
+    wpPeer.on('error',()=>status('Room error'));
+  };
+
+  window.joinWatchParty=function(){
+    if(!window.Peer){status('Party service unavailable');return}
+    let raw=document.getElementById('wpJoin').value.trim();
+    if(!raw){status('Paste a room link or ID');return}
+    try{
+      if(raw.includes('party=')) raw=new URL(raw,location.href).searchParams.get('party');
+    }catch(e){}
+    if(!raw){status('Invalid room');return}
+    if(wpPeer) try{wpPeer.destroy()}catch(e){}
+    wpPeer=new Peer();
+    wpPeer.on('open',()=>{
+      wpConn=wpPeer.connect(raw,{reliable:true});
+      wpConn.on('open',()=>{
+        status('Joined room');
+        wpConn.send({kind:'hello'});
+      });
+      wpConn.on('data',m=>status('Host: '+(m?.kind||'connected')));
+      wpConn.on('close',()=>status('Disconnected'));
+    });
+    wpPeer.on('error',()=>status('Could not join room'));
+  };
+
+  const party=new URLSearchParams(location.search).get('party');
+  if(party){
+    document.getElementById('watchPartyPanel').classList.add('open');
+    document.getElementById('wpJoin').value=party;
+    setTimeout(joinWatchParty,300);
+  }
+})();
+</script>
+
+
+<div id="playerWatchPartyUI" style="display:none">
+  <button id="playerWatchPartyBtn" onclick="togglePlayerWatchParty()">👥 Watch Party</button>
+  <div id="playerWatchPartyPanel">
+    <h3>👥 Watch Party</h3>
+    <p>Create a room and send the link to your friends. The video player stays External.</p>
+    <button class="playerWPBtn" style="width:100%" onclick="createPlayerWatchParty()">Create Room</button>
+    <input id="playerWPJoin" placeholder="Paste room link / room ID">
+    <button class="playerWPBtn secondary" style="width:100%" onclick="joinPlayerWatchParty()">Join Room</button>
+    <div id="playerWPLink" class="playerWPLink"></div>
+    <div id="playerWPStatus">Solo</div>
+  </div>
+</div>
+<script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+<script>
+(function(){
+  const path=location.pathname.toLowerCase();
+  const params=new URLSearchParams(location.search);
+
+  // The external VidKing URL is not editable by our site, so the party UI is
+  // shown on our player-launch page before/alongside the external navigation.
+  // If this page itself has player/party parameters, show it too.
+  const isPlayerPage=params.has('watch') || params.has('player') || params.has('party');
+  if(isPlayerPage) document.getElementById('playerWatchPartyUI').style.display='block';
+
+  let peer=null,conn=null;
+
+  window.togglePlayerWatchParty=function(){
+    document.getElementById('playerWatchPartyPanel').classList.toggle('open');
+  };
+  function st(x){document.getElementById('playerWPStatus').textContent=x}
+
+  window.createPlayerWatchParty=function(){
+    if(!window.Peer){st('Party service unavailable');return}
+    try{peer?.destroy()}catch(e){}
+    peer=new Peer();
+    peer.on('open',id=>{
+      const u=new URL(location.href);
+      u.searchParams.set('party',id);
+      const link=u.toString();
+      const box=document.getElementById('playerWPLink');
+      box.textContent=link;box.style.display='block';
+      st('Room created • '+id);
+      try{navigator.clipboard.writeText(link)}catch(e){}
+    });
+    peer.on('connection',c=>{
+      conn=c;
+      c.on('open',()=>st('Guest connected'));
+      c.on('data',m=>st('Guest connected'));
+    });
+    peer.on('error',()=>st('Room error'));
+  };
+
+  window.joinPlayerWatchParty=function(){
+    if(!window.Peer){st('Party service unavailable');return}
+    let raw=document.getElementById('playerWPJoin').value.trim();
+    if(!raw){st('Paste room link or ID');return}
+    try{
+      if(raw.includes('party=')) raw=new URL(raw,location.href).searchParams.get('party');
+    }catch(e){}
+    if(!raw){st('Invalid room');return}
+    try{peer?.destroy()}catch(e){}
+    peer=new Peer();
+    peer.on('open',()=>{
+      conn=peer.connect(raw,{reliable:true});
+      conn.on('open',()=>{st('Joined room');conn.send({kind:'hello'})});
+      conn.on('close',()=>st('Disconnected'));
+    });
+    peer.on('error',()=>st('Could not join room'));
+  };
+})();
+</script>
+
+
+<div id="externalPlayerShell">
+  <div class="epsTop">
+    <button class="epsBack" onclick="closeExternalPlayer()">←</button>
+    <div class="epsTitle" id="epsTitle">Cinema Player</div>
+    <button class="epsParty" onclick="toggleEPSParty()">👥</button>
+    <button class="epsFull" onclick="epsFullscreen()">⛶</button>
+  </div>
+  <div class="epsStage" id="epsStage">
+    <iframe id="externalPlayerFrame"
+      allow="autoplay; fullscreen; picture-in-picture; encrypted-media; web-share"
+      allowfullscreen
+      playsinline
+      referrerpolicy="origin"></iframe>
+
+    <div class="epsPartyPanel" id="epsPartyPanel">
+      <h3>👥 Watch Party</h3>
+      <p>البلاير نفسه External. الـ Watch Party موجود فوقه كطبقة من موقعك.</p>
+      <button class="epsBtn" onclick="createEPSRoom()">Create Room</button>
+      <input id="epsJoin" class="epsInput" placeholder="Room link أو Room ID">
+      <button class="epsBtn alt" onclick="joinEPSRoom()">Join Room</button>
+      <div id="epsLink" class="epsLink"></div>
+      <div id="epsStatus" class="epsStatus">Solo</div>
+    </div>
+  </div>
+</div>
+<script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+<script>
+(function(){
+  const q=new URLSearchParams(location.search);
+  if(!q.has('watch')) return;
+
+  document.documentElement.classList.add('extPlayer');
+  document.body.classList.add('extPlayer');
+
+  const type=q.get('watch')==='tv'?'tv':'movie';
+  const id=q.get('id');
+  const season=q.get('season')||'1';
+  const episode=q.get('episode')||'1';
+  const room=q.get('party');
+
+  const frame=document.getElementById('externalPlayerFrame');
+  const title=document.getElementById('epsTitle');
+
+  const externalUrl=type==='tv'
+    ? PLAYER+"tv/"+encodeURIComponent(id)+"/"+encodeURIComponent(season)+"/"+encodeURIComponent(episode)+"?color=e50914&autoPlay=true&nextEpisode=true&episodeSelector=true"
+    : MOVIE_PLAYER+"movie/"+encodeURIComponent(id)+"?color=e50914&autoPlay=true";
+
+  frame.src=externalUrl;
+  title.textContent=(type==='tv'?'TV • S'+season+' E'+episode:'Movie')+' • '+id;
+
+  let peer=null,conn=null;
+
+  window.closeExternalPlayer=function(){location.href='index.html'};
+  window.toggleEPSParty=function(){document.getElementById('epsPartyPanel').classList.toggle('open')};
+  window.epsFullscreen=function(){
+    const el=document.getElementById('epsStage');
+    (el.requestFullscreen||el.webkitRequestFullscreen||el.msRequestFullscreen)?.call(el);
+  };
+  function status(x){document.getElementById('epsStatus').textContent=x}
+
+  function setupConn(c){
+    conn=c;
+    c.on('open',()=>{status('Connected'); c.send({kind:'media',type,id,season,episode})});
+    c.on('data',m=>{
+      if(m?.kind==='media'){
+        status('Room synced');
+      } else if(m?.kind==='hello'){
+        status('Friend connected');
+      }
+    });
+    c.on('close',()=>status('Disconnected'));
+  }
+
+  window.createEPSRoom=function(){
+    if(!window.Peer){status('Party service unavailable');return}
+    try{peer?.destroy()}catch(e){}
+    peer=new Peer();
+    peer.on('open',rid=>{
+      const u=new URL(location.href);
+      u.searchParams.set('party',rid);
+      const link=u.toString();
+      const box=document.getElementById('epsLink');
+      box.textContent=link;box.style.display='block';
+      status('Room created');
+      try{navigator.clipboard.writeText(link)}catch(e){}
+    });
+    peer.on('connection',c=>setupConn(c));
+    peer.on('error',()=>status('Room error'));
+  };
+
+  window.joinEPSRoom=function(){
+    if(!window.Peer){status('Party service unavailable');return}
+    let rid=document.getElementById('epsJoin').value.trim();
+    if(!rid){status('Enter room link or ID');return}
+    try{
+      if(rid.includes('party=')) rid=new URL(rid,location.href).searchParams.get('party');
+    }catch(e){}
+    if(!rid){status('Invalid room');return}
+    try{peer?.destroy()}catch(e){}
+    peer=new Peer();
+    peer.on('open',()=>setupConn(peer.connect(rid,{reliable:true})));
+    peer.on('error',()=>status('Could not join room'));
+  };
+
+  // If a party link was used, open the party panel and join automatically.
+  if(room){
+    document.getElementById('epsPartyPanel').classList.add('open');
+    document.getElementById('epsJoin').value=room;
+    setTimeout(joinEPSRoom,350);
+  }
 })();
 </script>
 
