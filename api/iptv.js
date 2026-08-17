@@ -34,10 +34,10 @@ export default async function handler(req, res) {
 
     return res.status(200).json(data);
   } catch (error) {
-    console.error("IPTV API error:", error);
+  console.error("IPTV API error:", error);
 
-    return res.status(500).json({
-      error: "Could not connect to IPTV server"
-    });
+  return res.status(500).json({
+    error: "IPTV connection failed",
+    details: error?.message || String(error)
+  });
   }
-}
