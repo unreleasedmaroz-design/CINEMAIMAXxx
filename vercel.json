@@ -1,0 +1,8 @@
+{
+  "cleanUrls": true,
+  "functions": {
+    "api/iptv.js": {
+      "maxDuration": 60
+    }
+  }
+}
